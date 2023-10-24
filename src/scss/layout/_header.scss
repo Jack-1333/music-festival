@@ -1,0 +1,47 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m; //importamos la funcion mixins desde la carpeta base
+
+.header {
+    background-color: v.$green;
+    // @include m.heading(v.$white, true);
+
+    h1 {
+        color: v.$white;
+        text-align: center;
+
+        @include m.tablet {
+            margin: 0;
+        }
+    }
+
+    .content-header {
+        padding: 2rem;
+        @include m.tablet {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}
+
+.navigation-main {
+    @include m.tablet {
+        display: flex;
+        gap: 2rem;
+    }
+    a {
+        display: block;
+        text-align: center;
+        color: v.$white;
+        font-size: 2.4rem;
+        margin-bottom: 1rem;
+        // @include m.heading(v.$black);
+        @include m.tablet {
+            margin: 0;
+        }
+        //concatenando la psudoclase hover
+        &:hover {
+            color: v.$yellow;
+        }
+    }
+}
