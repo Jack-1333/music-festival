@@ -43,6 +43,7 @@ function versionWebp(done) {
     
     done();  //funcion que finaliza las acciones
 }
+
 function versionAvif(done) {
     const options = {
         quality: 50 //(objeto en js)la option va comprimir hasta 50 de calidad la imagen
@@ -53,17 +54,27 @@ function versionAvif(done) {
     
     done();  //funcion que finaliza las acciones
 }
+
+function javascript(done) {
+    src('src/js/**/*.js')
+    .pipe( dest('build/js') );
+
+    done();
+}
+
 //creando la funcion dev: desarrolador
 function dev(done) {
     //  css(); //ejecute la funcio css
     //  done(); //tambien indicar la finalizacion
     watch('src/scss/**/*.scss', css);//Ejeccuta la funcion watch cuando hay algun cambio en la carpeta scss
+    watch('src/js/**/*.js', javascript);
     done();
 }
 
+exports.js =javascript;
 exports.css = css;//ejecuntando la funcion css para que gulp pueda ejecutal el comando
 exports.images = images;//ejecuntando la funcion images
 exports.versionWebp = versionWebp;
 exports.versionAvif = versionAvif;
 //exports.dev = dev;ejecuntando la funcion dev
-exports.dev = parallel(images, versionWebp, versionAvif, dev);//ejecuntando la funcion dev e images en paralelo
+exports.dev = parallel(images, versionWebp, versionAvif, javascript, dev);//ejecuntando la funcion dev e images en paralelo
